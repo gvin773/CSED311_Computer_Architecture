@@ -2,7 +2,7 @@
 
 `include "opcodes.v"
 
-module control_unit (
+module ControlUnit (
     part_of_inst, is_jal, is_jalr, branch, mem_read,
     mem_to_reg, mem_write, alu_src, write_enable, pc_to_reg, is_ecall);
 
