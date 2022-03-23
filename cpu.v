@@ -67,10 +67,10 @@ module CPU(input reset,       // positive reset signal
   adder add4(
     .in_address(current_pc),
     .k(4),
-    .out_address(pc_add4);
+    .out_address(pc_add4)
   );
 
-  assign next_pc <= pc_add4;
+  assign next_pc = pc_add4;
   
   // ---------- Instruction Memory ----------
   InstMemory imem(
@@ -122,9 +122,9 @@ module CPU(input reset,       // positive reset signal
     .imm_gen_out(imm_gen_out)    // output
   );
 
-  assign part_of_inst_alu_control[10] <= Instr[30]; //funct7
-  assign part_of_inst_alu_control[9:7] <= Instr[14:12]; //funct3
-  assign part_of_inst_alu_control[6:0] <= Instr[6:0]; //opcode
+  assign part_of_inst_alu_control[10] = Instr[30]; //funct7
+  assign part_of_inst_alu_control[9:7] = Instr[14:12]; //funct3
+  assign part_of_inst_alu_control[6:0] = Instr[6:0]; //opcode
 
   // ---------- ALU Control Unit ----------
   ALUControlUnit alu_ctrl_unit (

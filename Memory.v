@@ -49,7 +49,11 @@ module DataMemory #(parameter MEM_DEPTH = 16384) (input reset,
   reg [31:0] temp;
   initial temp <= 0;
 
-  if(mem_read) temp = mem[dmem_addr];
+  always @(*) begin
+    if(mem_read) begin
+      temp = mem[dmem_addr];
+    end
+  end
   assign dout = temp; //asynchronously read - gyubin
 
   always @(posedge clk) begin //synchronously write - gyubin

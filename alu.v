@@ -8,8 +8,8 @@ module ALU #(parameter data_width = 32) (
         output reg alu_bcond);
 
 initial begin
-	alu_result <= 0;
-    alu_bcond <= 0;
+	alu_result = 0;
+    alu_bcond = 0;
 end
 
 always @(alu_in_1 or alu_in_2 or alu_op) begin
@@ -34,7 +34,7 @@ always @(alu_in_1 or alu_in_2 or alu_op) begin
             else alu_bcond = 0;
         end
         `ALU_BLT: begin
-            if(alu_in_1 < alu_in_2) alu_bcond = 1;
+            if(alu_in_1 < alu_in_2) alu_bcond <= 1;
             else alu_bcond = 0;
         end
         `ALU_BGE: begin
