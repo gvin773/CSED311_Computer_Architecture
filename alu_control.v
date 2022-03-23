@@ -1,6 +1,6 @@
 `include "opcodes.v"
 
-module ALUControlUnit #(parameter data_width = 32) (
+module ALUControlUnit #(parameter data_width = 11) (
 	input [data_width - 1 : 0] part_of_inst,
 	    output reg [3 : 0] alu_op);
 
@@ -18,8 +18,9 @@ end
 always @(part_of_inst) begin
     
     Opcode = part_of_inst[6:0];
-    Fucnt3 = part_of_inst[14:12];
-    FUnct7 = part_of_inst[31:25];
+    Fucnt3 = part_of_inst[9:7];
+    Funct7 = 7'b0000000;
+    FUnct7[5] = part_of_inst[10];
 
 	case(Opcode)
         `ARITHMETIC: begin//R-Type: funct3, funct7[5]

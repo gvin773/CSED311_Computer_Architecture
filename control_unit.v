@@ -20,7 +20,6 @@ module control_unit (
     output reg is_ecall;
 
     initial begin
-        part_of_inst<=0;
         is_jal<=0;
         is_jalr<=0;
         branch<=0;
@@ -35,7 +34,6 @@ module control_unit (
 
     always @(*) begin
         if(part_of_inst==`JAL) begin  //is_jal
-            part_of_inst=0;
             is_jal=1;
             is_jalr=0;
             branch=0;
@@ -49,7 +47,6 @@ module control_unit (
         end 
 
         else if(part_of_inst==`JALR) begin  //is_jalr
-            part_of_inst=0;
             is_jal=0;
             is_jalr=1;
             branch=0;
@@ -63,7 +60,6 @@ module control_unit (
         end 
 
         else if(part_of_inst==`BRANCH) begin  //branch
-            part_of_inst=0;
             is_jal=0;
             is_jalr=0;
             branch=1;
@@ -90,7 +86,6 @@ module control_unit (
         end
 
         else if ((part_of_inst!=`ARITHMETIC) && (part_of_inst!=`STORE)&&(part_of_inst!=`BRANCH)) begin  //ALLSrc
-            part_of_inst=0;
             is_jal=0;
             is_jalr=0;
             branch=0;
@@ -117,7 +112,6 @@ module control_unit (
         end
 
         else if (part_of_inst==`STORE) begin  //MemWrite
-            part_of_inst=0;
             is_jal=0;
             is_jalr=0;
             branch=0;
@@ -131,7 +125,6 @@ module control_unit (
         end
 
         else if (part_of_inst==`LOAD) begin  //MemtoReg
-            part_of_inst=0;
             is_jal=0;
             is_jalr=0;
             branch=0;
@@ -145,7 +138,6 @@ module control_unit (
         end 
 
         else if ((part_of_inst==`JAL) || (part_of_inst==`JALR)) begin  //PCtoReg
-            part_of_inst=0;
             is_jal=0;
             is_jalr=0;
             branch=0;
@@ -158,7 +150,6 @@ module control_unit (
             is_ecall=0;   
         end
 	else if (part_of_inst==`ECALL) begin  //isecall
-            part_of_inst=0;
             is_jal=0;
             is_jalr=0;
             branch=0;

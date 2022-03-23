@@ -10,7 +10,7 @@ end
 
 always @(posedge clk) begin
     if(reset) current_pc = 0;
-    else current_pc = next_pc;
+    else current_pc = next_pc; //update when posedge
 end
 
 endmodule

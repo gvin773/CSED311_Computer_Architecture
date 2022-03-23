@@ -5,7 +5,7 @@ module ALU #(parameter data_width = 32) (
     input [data_width - 1 : 0] alu_in_1, 
 	input [data_width - 1 : 0] alu_in_2,
        	output reg [data_width - 1: 0] alu_result,
-        output reg [data_width - 1: 0] alu_bcond);
+        output reg alu_bcond);
 
 initial begin
 	alu_result <= 0;
@@ -17,7 +17,7 @@ always @(alu_in_1 or alu_in_2 or alu_op) begin
     alu_bcond = 0;
 
 	case(alu_op)
-		`ALU_ADD: alu_result = alu_in_1 + alu_in_2;
+	    `ALU_ADD: alu_result = alu_in_1 + alu_in_2;
         `ALU_SUB: alu_result = alu_in_1 - alu_in_2;
         `ALU_OR: alu_result = alu_in_1 | alu_in_2;
         `ALU_AND: alu_result = alu_in_1 & alu_in_2;
