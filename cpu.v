@@ -15,6 +15,9 @@ module CPU(input reset,       // positive reset signal
   //for pc
   wire [31:0] next_pc;
   wire [31:0] current_pc;
+  wire [31:0] pc_mux_in_2;
+  wire [31:0] pc_first_mux_out;
+  wire pc_src1, pc_src2;
 
   wire [31:0] pc_add4;
 
@@ -42,6 +45,7 @@ module CPU(input reset,       // positive reset signal
   wire [31:0] rs1_dout;
   wire [31:0] rs2_dout;
   wire [31:0] register_write_data;
+  wire [31:0] register_write_data_before;
 
   //for ALUControlUnit
   wire [10:0] part_of_inst_alu_control;
@@ -70,8 +74,30 @@ module CPU(input reset,       // positive reset signal
     .out_address(pc_add4)
   );
 
-  assign next_pc = pc_add4;
-  
+  adder current_pc_and_imm_gen_out(
+    .in_address(current_pc),
+    .k(imm_gen_out),
+    .out_address(pc_mux_in_2)
+  );
+
+  assign pc_src1 = ((branch & alu_bcond) | is_jal);
+
+  MUX pc_add4_and_pc_mux_in_2(
+    .mux_in_1(pc_add4),
+    .mux_in_2(pc_mux_in_2),
+    .select_in(pc_src1),
+    .mux_result(pc_first_mux_out)
+  );
+
+  assign pc_src2 = is_jalr;
+
+  MUX get_next_pc(
+    .mux_in_1(pc_first_mux_out),
+    .mux_in_2(alu_result),
+    .select_in(pc_src2),
+    .mux_result(next_pc)
+  );
+
   // ---------- Instruction Memory ----------
   InstMemory imem(
     .reset(reset),   // input
@@ -84,6 +110,13 @@ module CPU(input reset,       // positive reset signal
     .mux_in_1(alu_result),
     .mux_in_2(data_memory_out),
     .select_in(mem_to_reg),
+    .mux_result(register_write_data_before)
+  );
+
+  MUX get_register_write_data (
+    .mux_in_1(register_write_data_before),
+    .mux_in_2(pc_add4),
+    .select_in(pc_to_reg),
     .mux_result(register_write_data)
   );
 
@@ -124,7 +157,7 @@ module CPU(input reset,       // positive reset signal
     .imm_gen_out(imm_gen_out)    // output
   );
 
-  assign part_of_inst_alu_control[10] = Instr[30]; //funct7
+  assign part_of_inst_alu_control[10] = Instr[30]; //funct7[5]
   assign part_of_inst_alu_control[9:7] = Instr[14:12]; //funct3
   assign part_of_inst_alu_control[6:0] = Instr[6:0]; //opcode
 
@@ -150,9 +183,9 @@ module CPU(input reset,       // positive reset signal
     .alu_bcond(alu_bcond)     // output
   );
 
-  always @(alu_result) begin
+  /*always @(alu_result) begin
     $display("alu_result: %d", alu_result);
-  end
+  end*/
 
   // ---------- Data Memory ----------
   DataMemory dmem(

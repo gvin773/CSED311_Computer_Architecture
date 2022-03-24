@@ -1,3 +1,4 @@
+//completed-gyubin
 `include "opcodes.v"
 
 module ALU #(parameter data_width = 32) ( 
@@ -38,7 +39,7 @@ always @(alu_in_1 or alu_in_2 or alu_op) begin
             if(alu_in_1 < alu_in_2) alu_bcond = 1;
         end
         `ALU_BGE: begin
-            if(alu_in_1 > alu_in_2) alu_bcond = 1;
+            if(alu_in_1 >= alu_in_2) alu_bcond = 1;
         end
 	endcase
 end

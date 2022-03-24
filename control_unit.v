@@ -1,5 +1,6 @@
 //Control -hyunjun
-
+//revised - gyubin
+//checked - gyubin
 `include "opcodes.v"
 
 module ControlUnit (

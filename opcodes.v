@@ -43,7 +43,7 @@
 `define FUNCT7_OTHERS   7'b0000000
 
 
-//ALUOp - gyubin
+//ALU operation - gyubin
 `define ALU_ADD 4'b0000
 `define ALU_SUB 4'b0001
 `define ALU_OR 4'b0010

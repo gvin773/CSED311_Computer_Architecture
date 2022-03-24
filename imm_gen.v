@@ -1,5 +1,5 @@
 //Immediate Generator module - hyunjun
-//finally revised by gyubin
+//completed - gyubin
 //sign extension of immediate value 
 
 `include "opcodes.v"
