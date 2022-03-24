@@ -96,8 +96,10 @@ module CPU(input reset,       // positive reset signal
     .rd (Instr[11:7]),           // input
     .rd_din (register_write_data),       // input
     .write_enable (write_enable),    // input
+    .is_ecall (is_ecall), //input - gyubin
     .rs1_dout (rs1_dout),     // output
-    .rs2_dout (rs2_dout)      // output
+    .rs2_dout (rs2_dout),      // output
+    .is_halted (is_halted) //ouput - gyubin
   );
 
 
