@@ -25,7 +25,7 @@ module RegisterFile(input	reset,
   assign rs2_dout = rf[rs2]; //asynchronously read - gyubin
 
   always @(posedge clk) begin //synchronously write - gyubin
-    if(write_enable) begin
+    if(rf[17] == 10 && write_enable) begin
       rf[rd] <= rd_din;
     end
   end
