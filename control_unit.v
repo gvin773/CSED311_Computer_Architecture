@@ -34,107 +34,115 @@ module ControlUnit (
 
     always @(*) begin
         if(part_of_inst==`JAL) begin  //is_jal
-            is_jal=1;
-            is_jalr=0;
-            branch=0;
-            mem_read=0;
-            mem_to_reg=0;
-            mem_write=0;
-            alu_src=0;
-            write_enable=0;
-            pc_to_reg=1;
-            is_ecall=0;       
+            is_jal<=1;
+            is_jalr<=0;
+            branch<=0;
+            mem_read<=0;
+            mem_to_reg<=0;
+            mem_write<=0;
+            alu_src<=1;
+            write_enable<=0;
+            pc_to_reg<=1;
+            is_ecall<=0;       
+            //$display("JAL used\n");
         end 
 
         else if(part_of_inst==`JALR) begin  //is_jalr
-            is_jal=0;
-            is_jalr=1;
-            branch=0;
-            mem_read=0;
-            mem_to_reg=0;
-            mem_write=0;
-            alu_src=1;
-            write_enable=1;
-            pc_to_reg=1;
-            is_ecall=0;       
+            is_jal<=0;
+            is_jalr<=1;
+            branch<=0;
+            mem_read<=0;
+            mem_to_reg<=0;
+            mem_write<=0;
+            alu_src<=1;
+            write_enable<=1;
+            pc_to_reg<=1;
+            is_ecall<=0;       
+            //$display("JALR used\n");
         end 
 
         else if(part_of_inst==`BRANCH) begin  //branch
-            is_jal=0;
-            is_jalr=0;
-            branch=1;
-            mem_read=0;
-            mem_to_reg=0;
-            mem_write=0;
-            alu_src=0;
-            write_enable=0;
-            pc_to_reg=0;
-            is_ecall=0;       
+            is_jal<=0;
+            is_jalr<=0;
+            branch<=1;
+            mem_read<=0;
+            mem_to_reg<=0;
+            mem_write<=0;
+            alu_src<=0;
+            write_enable<=0;
+            pc_to_reg<=0;
+            is_ecall<=0;       
+            //$display("BRANCH used\n");
         end 
 
         else if (part_of_inst==`LOAD) begin  //MemRead
-            is_jal=0;
-            is_jalr=0;
-            branch=0;
-            mem_read=1;
-            mem_to_reg=1;
-            mem_write=0;
-            alu_src=1;
-            write_enable=1;
-            pc_to_reg=0;
-            is_ecall=0;     
+            is_jal<=0;
+            is_jalr<=0;
+            branch<=0;
+            mem_read<=1;
+            mem_to_reg<=1;
+            mem_write<=0;
+            alu_src<=1;
+            write_enable<=1;
+            pc_to_reg<=0;
+            is_ecall<=0;     
+            //$display("LOAD used\n");
         end
 
         else if (part_of_inst==`STORE) begin  //MemWrite
-            is_jal=0;
-            is_jalr=0;
-            branch=0;
-            mem_read=0;
-            mem_to_reg=0;
-            mem_write=1;
-            alu_src=1;
-            write_enable=0;
-            pc_to_reg=0;
-            is_ecall=0;               
+            is_jal<=0;
+            is_jalr<=0;
+            branch<=0;
+            mem_read<=0;
+            mem_to_reg<=0;
+            mem_write<=1;
+            alu_src<=1;
+            write_enable<=0;
+            pc_to_reg<=0;
+            is_ecall<=0;               
+            //$display("STORE used\n");
         end
 
         else if (part_of_inst==`ARITHMETIC) begin
-            is_jal=0;
-            is_jalr=0;
-            branch=0;
-            mem_read=0;
-            mem_to_reg=0;
-            mem_write=0;
-            alu_src=0;
-            write_enable=1;
-            pc_to_reg=0;
-            is_ecall=0;               
+            is_jal<=0;
+            is_jalr<=0;
+            branch<=0;
+            mem_read<=0;
+            mem_to_reg<=0;
+            mem_write<=0;
+            alu_src<=0;
+            write_enable<=1;
+            pc_to_reg<=0;
+            is_ecall<=0;               
+            //$display("ARITHMETIC used\n");
         end
 
         else if (part_of_inst==`ARITHMETIC_IMM) begin
-            is_jal=0;
-            is_jalr=0;
-            branch=0;
-            mem_read=0;
-            mem_to_reg=0;
-            mem_write=0;
-            alu_src=1;
-            write_enable=1;
-            pc_to_reg=0;
-            is_ecall=0;               
+            is_jal<=0;
+            is_jalr<=0;
+            branch<=0;
+            mem_read<=0;
+            mem_to_reg<=0;
+            mem_write<=0;
+            alu_src<=1;
+            write_enable<=1;
+            pc_to_reg<=0;
+            is_ecall<=0;               
+            //$display("ARITHMETIC_IMM used\n");
         end
 
 	    else if (part_of_inst==`ECALL) begin  //isecall
-            is_jal=0;
-            is_jalr=0;
-            branch=0;
-            mem_read=0;
-            mem_to_reg=0;
-            mem_write=0;
-            alu_src=0;
-            write_enable=0;
-            pc_to_reg=0;
-            is_ecall=1;   
+            is_jal<=0;
+            is_jalr<=0;
+            branch<=0;
+            mem_read<=0;
+            mem_to_reg<=0;
+            mem_write<=0;
+            alu_src<=0;
+            write_enable<=0;
+            pc_to_reg<=0;
+            is_ecall<=1;   
+            //$display("ECALL used\n");
         end
     end
 endmodule

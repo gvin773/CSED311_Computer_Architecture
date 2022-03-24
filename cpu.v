@@ -150,6 +150,10 @@ module CPU(input reset,       // positive reset signal
     .alu_bcond(alu_bcond)     // output
   );
 
+  always @(alu_result) begin
+    $display("alu_result: %d", alu_result);
+  end
+
   // ---------- Data Memory ----------
   DataMemory dmem(
     .reset (reset),      // input

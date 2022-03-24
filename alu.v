@@ -15,9 +15,12 @@ end
 always @(alu_in_1 or alu_in_2 or alu_op) begin
     alu_result = 0;
     alu_bcond = 0;
-
+    
 	case(alu_op)
-	    `ALU_ADD: alu_result = alu_in_1 + alu_in_2;
+	    `ALU_ADD: begin
+            alu_result = alu_in_1 + alu_in_2;
+            //$display("ADD check\n");
+        end
         `ALU_SUB: alu_result = alu_in_1 - alu_in_2;
         `ALU_OR: alu_result = alu_in_1 | alu_in_2;
         `ALU_AND: alu_result = alu_in_1 & alu_in_2;
@@ -27,19 +30,15 @@ always @(alu_in_1 or alu_in_2 or alu_op) begin
         
         `ALU_BEQ: begin
             if(alu_in_1 == alu_in_2) alu_bcond = 1;
-            else alu_bcond = 0;
         end
         `ALU_BNE: begin
             if(alu_in_1 != alu_in_2) alu_bcond = 1;
-            else alu_bcond = 0;
         end
         `ALU_BLT: begin
-            if(alu_in_1 < alu_in_2) alu_bcond <= 1;
-            else alu_bcond = 0;
+            if(alu_in_1 < alu_in_2) alu_bcond = 1;
         end
         `ALU_BGE: begin
             if(alu_in_1 > alu_in_2) alu_bcond = 1;
-            else alu_bcond = 0;
         end
 	endcase
 end
