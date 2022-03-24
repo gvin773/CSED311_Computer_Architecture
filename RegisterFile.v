@@ -26,12 +26,12 @@ module RegisterFile(input	reset,
 
   always @(posedge clk) begin //synchronously write - gyubin
     if(write_enable) begin
-      rf[rd] = rd_din;
+      rf[rd] <= rd_din;
     end
   end
 
   always @(*) begin //halt machine - gyubin
-    if(is_ecall && rf[17] == 10) begin
+    if(is_ecall) begin
       is_halted = 1;
     end
     else begin

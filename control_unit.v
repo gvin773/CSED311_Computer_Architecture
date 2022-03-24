@@ -42,7 +42,7 @@ module ControlUnit (
             mem_write=0;
             alu_src=0;
             write_enable=0;
-            pc_to_reg=0;
+            pc_to_reg=1;
             is_ecall=0;       
         end 
 
@@ -53,9 +53,9 @@ module ControlUnit (
             mem_read=0;
             mem_to_reg=0;
             mem_write=0;
-            alu_src=0;
-            write_enable=0;
-            pc_to_reg=0;
+            alu_src=1;
+            write_enable=1;
+            pc_to_reg=1;
             is_ecall=0;       
         end 
 
@@ -72,41 +72,15 @@ module ControlUnit (
             is_ecall=0;       
         end 
 
-        if((part_of_inst!=`STORE)&&(part_of_inst!=`BRANCH)) begin  //RegWrite
-            is_jal=0;
-            is_jalr=0;
-            branch=0;
-            mem_read=0;
-            mem_to_reg=0;
-            mem_write=0;
-            alu_src=0;
-            write_enable=1;
-            pc_to_reg=0;
-            is_ecall=0;
-        end
-
-        else if ((part_of_inst!=`ARITHMETIC) && (part_of_inst!=`STORE)&&(part_of_inst!=`BRANCH)) begin  //ALLSrc
-            is_jal=0;
-            is_jalr=0;
-            branch=0;
-            mem_read=0;
-            mem_to_reg=0;
-            mem_write=0;
-            alu_src=1;
-            write_enable=0;
-            pc_to_reg=0;
-            is_ecall=0;
-        end
-
         else if (part_of_inst==`LOAD) begin  //MemRead
             is_jal=0;
             is_jalr=0;
             branch=0;
             mem_read=1;
-            mem_to_reg=0;
+            mem_to_reg=1;
             mem_write=0;
-            alu_src=0;
-            write_enable=0;
+            alu_src=1;
+            write_enable=1;
             pc_to_reg=0;
             is_ecall=0;     
         end
@@ -118,26 +92,13 @@ module ControlUnit (
             mem_read=0;
             mem_to_reg=0;
             mem_write=1;
-            alu_src=0;
+            alu_src=1;
             write_enable=0;
             pc_to_reg=0;
             is_ecall=0;               
         end
 
-        else if (part_of_inst==`LOAD) begin  //MemtoReg
-            is_jal=0;
-            is_jalr=0;
-            branch=0;
-            mem_read=0;
-            mem_to_reg=1;
-            mem_write=0;
-            alu_src=0;
-            write_enable=0;
-            pc_to_reg=0;
-            is_ecall=0;            
-        end 
-
-        else if ((part_of_inst==`JAL) || (part_of_inst==`JALR)) begin  //PCtoReg
+        else if (part_of_inst==`ARITHMETIC) begin
             is_jal=0;
             is_jalr=0;
             branch=0;
@@ -145,11 +106,25 @@ module ControlUnit (
             mem_to_reg=0;
             mem_write=0;
             alu_src=0;
-            write_enable=0;
-            pc_to_reg=1;
-            is_ecall=0;   
+            write_enable=1;
+            pc_to_reg=0;
+            is_ecall=0;               
         end
-	else if (part_of_inst==`ECALL) begin  //isecall
+
+        else if (part_of_inst==`ARITHMETIC_IMM) begin
+            is_jal=0;
+            is_jalr=0;
+            branch=0;
+            mem_read=0;
+            mem_to_reg=0;
+            mem_write=0;
+            alu_src=1;
+            write_enable=1;
+            pc_to_reg=0;
+            is_ecall=0;               
+        end
+
+	    else if (part_of_inst==`ECALL) begin  //isecall
             is_jal=0;
             is_jalr=0;
             branch=0;

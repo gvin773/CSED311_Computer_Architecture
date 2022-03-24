@@ -8,8 +8,8 @@ module ALU #(parameter data_width = 32) (
         output reg alu_bcond);
 
 initial begin
-	alu_result = 0;
-    alu_bcond = 0;
+	alu_result <= 0;
+    alu_bcond <= 0;
 end
 
 always @(alu_in_1 or alu_in_2 or alu_op) begin
