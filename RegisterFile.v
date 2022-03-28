@@ -17,10 +17,6 @@ module RegisterFile(input	reset,
   // Asynchronously read register file
   // Synchronously write data to the register file
 
-  initial begin
-    is_halted <= 0;
-  end
-
   assign rs1_dout = rf[rs1];
   assign rs2_dout = rf[rs2]; //asynchronously read - gyubin
 

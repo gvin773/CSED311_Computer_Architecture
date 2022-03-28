@@ -20,19 +20,6 @@ module ControlUnit (
     output reg pc_to_reg;
     output reg is_ecall;
 
-    initial begin
-        is_jal<=0;
-        is_jalr<=0;
-        branch<=0;
-        mem_read<=0;
-        mem_to_reg<=0;
-        mem_write<=0;
-        alu_src<=0;
-        write_enable<=0;
-        pc_to_reg<=0;
-        is_ecall<=0;
-    end
-
     always @(*) begin
         if(part_of_inst==`JAL) begin  //is_jal
             is_jal<=1;

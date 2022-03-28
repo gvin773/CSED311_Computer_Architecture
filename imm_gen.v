@@ -11,10 +11,6 @@ output reg[31:0] imm_gen_out;
 
 wire [6:0] Opcode;
 
-initial begin
-    imm_gen_out <= 32'b0;
-end
-
 assign Opcode = part_of_inst[6:0];
 
 always @(*) begin

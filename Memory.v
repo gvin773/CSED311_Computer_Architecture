@@ -47,7 +47,6 @@ module DataMemory #(parameter MEM_DEPTH = 16384) (input reset,
   // (use dmem_addr to access memory)
 
   reg [31:0] temp;
-  initial temp <= 0;
 
   always @(*) begin
     if(mem_read) begin

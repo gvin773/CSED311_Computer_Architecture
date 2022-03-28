@@ -9,14 +9,7 @@ module ALUControlUnit #(parameter data_width = 11) (
     reg [2:0] Funct3; //inst[14:12]
     reg [6:0] Funct7; //inst[31:25], inst[30] for sub
 
-initial begin
-    alu_op <= `ALU_NONE; //do nothing
-    Opcode <= 7'b0000000;
-    Funct3 <= 3'b000;
-    Funct7 <= 7'b0000000;
-end
-
-always @(part_of_inst) begin
+always @(*) begin
     
     Opcode = part_of_inst[6:0];
     Funct3 = part_of_inst[9:7];
