@@ -35,6 +35,13 @@ module top;
   // After simulation finishes.
   integer i;
   always @(posedge clk) begin
+    /*if (total_cycle > 70) begin
+      $display("TOTAL CYCLE %d\n", total_cycle);
+      // Print register values
+      for (i = 0; i < 32; i = i + 1)
+        $display("%d %x\n", i, cpu.reg_file.rf[i]);
+      $finish();
+    end*/
     if (is_halted) begin
       $display("TOTAL CYCLE %d\n", total_cycle);
       // Print register values

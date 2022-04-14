@@ -95,8 +95,8 @@ module ControlUnit (
             `EX_L : begin
                 PCWriteCond <= 0;
                 PCWrite <= 0;
-                IorD <= 0;
-                MemRead <= 0;
+                IorD <= 1;///////
+                MemRead <= 1; ////////
                 MemWrite <= 0;
                 MemtoReg <= 0;
                 IRWrite <= 0;
@@ -148,17 +148,17 @@ module ControlUnit (
 
             `EX_JAL1 : begin
                 PCWriteCond <= 0;
-                PCWrite <= 0;
+                PCWrite <= 1;//////
                 IorD <= 0;
                 MemRead <= 0;
                 MemWrite <= 0;
                 MemtoReg <= 0;
                 IRWrite <= 0;
-                PCSource <= 0;
+                PCSource <= 1;/////
                 ALUOp <= `PLUS;
-                ALUSrcB <= 2'b10;
+                ALUSrcB <= 2'b01;/////
                 ALUSrcA <= 0;
-                RegWrite <= 1;
+                RegWrite <= 0;/////
                 is_ecall <= 0;
 
                 state <= `EX_JAL2;
@@ -166,7 +166,7 @@ module ControlUnit (
 
             `EX_JAL2 : begin
                 PCWriteCond <= 0;
-                PCWrite <= 1;
+                PCWrite <= 0;/////
                 IorD <= 0;
                 MemRead <= 0;
                 MemWrite <= 0;
@@ -176,7 +176,7 @@ module ControlUnit (
                 ALUOp <= `PLUS;
                 ALUSrcB <= 2'b00;
                 ALUSrcA <= 0;
-                RegWrite <= 0;
+                RegWrite <= 1;/////
                 is_ecall <= 0;
 
                 state <= `IF;
@@ -192,9 +192,9 @@ module ControlUnit (
                 IRWrite <= 0;
                 PCSource <= 0;
                 ALUOp <= `PLUS;
-                ALUSrcB <= 2'b10;
-                ALUSrcA <= 1;
-                RegWrite <= 1;
+                ALUSrcB <= 2'b01;/////
+                ALUSrcA <= 0;/////
+                RegWrite <= 0;/////
                 is_ecall <= 0;
 
                 state <= `EX_JALR2;
@@ -208,11 +208,11 @@ module ControlUnit (
                 MemWrite <= 0;
                 MemtoReg <= 0;
                 IRWrite <= 0;
-                PCSource <= 1;
+                PCSource <= 0;/////
                 ALUOp <= `PLUS;
-                ALUSrcB <= 2'b00;
-                ALUSrcA <= 0;
-                RegWrite <= 0;
+                ALUSrcB <= 2'b10;/////
+                ALUSrcA <= 1;/////
+                RegWrite <= 1;/////
                 is_ecall <= 0;
 
                 state <= `IF;
@@ -242,13 +242,13 @@ module ControlUnit (
                 IorD <= 1;
                 MemRead <= 1;
                 MemWrite <= 0;
-                MemtoReg <= 0;
+                MemtoReg <= 1;/////
                 IRWrite <= 0;
                 PCSource <= 0;
                 ALUOp <= part_of_inst;
                 ALUSrcB <= 2'b00;
                 ALUSrcA <= 0;
-                RegWrite <= 0;
+                RegWrite <= 1;////
                 is_ecall <= 0;
 
                 state <= `WB;
@@ -284,7 +284,7 @@ module ControlUnit (
                 ALUOp <= part_of_inst;
                 ALUSrcB <= 2'b00;
                 ALUSrcA <= 0;
-                RegWrite <= 1;
+                RegWrite <= 0;////
                 is_ecall <= 0;
 
                 state <= `IF;
