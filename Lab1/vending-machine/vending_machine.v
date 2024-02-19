@@ -1,8 +1,3 @@
-// Title         : vending_machine.v
-// Author      : Jae-Eon Jo (Jojaeeon@postech.ac.kr) 
-//			     Dongup Kwon (nankdu7@postech.ac.kr) (2015.03.30)
-//			     Jaehun Ryu (jaehunryu@postech.ac.kr) (2021.03.07)
-
 `include "vending_machine_def.v"
 
 
