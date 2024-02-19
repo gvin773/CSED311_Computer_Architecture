@@ -6,19 +6,20 @@ The principles presented in the lectures are reinforced in the laboratory throug
 
 ## Assignments
 ### Lab 1 RTL design
- - asdf
+ - Implement ALU (Arithmetic Logic Unit) in Verilog
+ - Implement a simple vending machine RTL in Verilog: A simple Finite State Machine (FSM)
 
 ### Lab 2 Single-cycle CPU
- - asdf
+ - Implement a single-cycle RISC-V CPU (RV32I)
 
 ### Lab 3 Multi-Cycle CPU
- - asdf
+ - Implement a multi-cycle RISC-V CPU (RV32I)
 
 ### Lab 4-1 - pipelined CPU without control flow instructions
- - asdf
+ - 5-stage pipelined CPU (w/o control flow instrs.)
 
-### Lab 4-2 - pipelined CPU or branch predictor
-  - asdf
+### Lab 4-2 - pipelined CPU or ~~branch predictor~~
+  - 5-stage pipelined CPU w/ control flow instructions
 
-### Lab 5 - cache or data prefetcher
-  - asdf
+### Lab 5 - cache or ~~data prefetcher~~
+  - Implement blocking data cache upon your Lab4-2a implementation
